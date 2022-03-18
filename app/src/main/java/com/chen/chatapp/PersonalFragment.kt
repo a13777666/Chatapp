@@ -16,7 +16,6 @@ class PersonalFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPersonalBinding.inflate(layoutInflater)
-        return super.onCreateView(inflater, container, savedInstanceState)
         return  binding.root
     }
 

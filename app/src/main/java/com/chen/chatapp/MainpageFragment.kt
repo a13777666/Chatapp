@@ -1,20 +1,27 @@
 package com.chen.chatapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chen.chatapp.databinding.FragmentMainpageBinding
 import com.chen.chatapp.databinding.RowChatroomBinding
+import okhttp3.WebSocket
 
 class MainpageFragment: Fragment() {
+    companion object{
+        val TAG = MainpageFragment::class.java.simpleName
+    }
     lateinit var binding: FragmentMainpageBinding
     private  lateinit var adapter: ChatRoomAdapter
-    val rooms = mutableListOf<Lightyear>()
+    val viewModel by viewModels<MainpageViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +29,6 @@ class MainpageFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainpageBinding.inflate(layoutInflater)
-        return super.onCreateView(inflater, container, savedInstanceState)
         return  binding.root
     }
 
@@ -33,9 +39,14 @@ class MainpageFragment: Fragment() {
         binding.roomRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
         adapter = ChatRoomAdapter()
         binding.roomRecycler.adapter = adapter
+
+        viewModel.chatRooms.observe(viewLifecycleOwner) { rooms ->
+            adapter.submitRooms(rooms)
+        }
+        viewModel.getAllRooms()
     }
 
-    inner class ChatRoomAdapter: RecyclerView.Adapter<ChatRoomViewHolder>(){
+    inner class ChatRoomAdapter: RecyclerView.Adapter<ChatRoomViewHolder>() {
         val chatrooms = mutableListOf<Lightyear>()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRoomViewHolder {
             val binding = RowChatroomBinding.inflate(layoutInflater, parent, false)
@@ -46,7 +57,7 @@ class MainpageFragment: Fragment() {
             val lightYear = chatrooms[position]
             holder.room_title.setText(lightYear.stream_title)
             holder.host_name.setText(lightYear.nickname)
-            holder.online_num.setText(lightYear.online_num).toString()
+            holder.online_num.setText(lightYear.online_num.toString())
             holder.tags.setText(lightYear.tags)
             //Glide processes photo
             Glide.with(this@MainpageFragment)
@@ -57,9 +68,14 @@ class MainpageFragment: Fragment() {
         }
 
         override fun getItemCount(): Int {
-            return  chatrooms.size
+            return chatrooms.size
         }
 
+        fun submitRooms(rooms: List<Lightyear>) {
+            chatrooms.clear()
+            chatrooms.addAll(rooms)
+            notifyDataSetChanged()
+        }
     }
 
     inner class ChatRoomViewHolder(val binding: RowChatroomBinding): RecyclerView.ViewHolder(binding.root){

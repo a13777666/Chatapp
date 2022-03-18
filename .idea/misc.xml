@@ -3,23 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1085" />
+        <entry key="app/src/main/res/drawable-v24/round_rectangle_nocolor.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/room_item_round_corner.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/round_rectangle_black.xml" value="0.1155" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1431159420289855" />
-        <entry key="app/src/main/res/layout/fragment_mainpage.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_mainpage.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.1431159420289855" />
         <entry key="app/src/main/res/layout/fragment_pick.xml" value="0.1431159420289855" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1431159420289855" />
-        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.1431159420289855" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/row_chatroom.xml" value="0.18" />
         <entry key="app/src/main/res/menu/bottom_nav_bar.xml" value="0.22239583333333332" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

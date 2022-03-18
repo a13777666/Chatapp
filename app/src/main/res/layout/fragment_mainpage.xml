@@ -21,9 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="456456456"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
