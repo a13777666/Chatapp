@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">yenchenapp</string>
+    <string name="singup_underline"><u>注册</u></string>
+    <string name="send">发送</string>
+    <string name="exitroom">确定要狠心离开聊天室？</string>
+    <string name="login">登入</string>
+    <string name="remember">记住我</string>
+    <string name="logout">登出</string>
+    <string name="select_album">从相簿中选择</string>
+    <string name="shot">拍照</string>
+    <string name="Sign_up">注册会员</string>
+    <string name="send2">送出</string>
+    <string name="sereach">搜寻</string>
+    <string name="personal">个人</string>
+    <string name="mainpage">首页</string>
+    <string name="recommend">热门推荐</string>
+</resources>

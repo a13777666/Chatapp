@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.chen.chatapp.databinding.FragmentPickBinding
 
 class PickFragment: Fragment() {
+
     lateinit var binding: FragmentPickBinding
 
     override fun onCreateView(
@@ -21,5 +22,15 @@ class PickFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val parentActivity = requireActivity() as MainActivity
+
+        binding.bExit.setOnClickListener {
+            parentActivity.supportFragmentManager.beginTransaction().run {
+                replace(R.id.main_container, parentActivity.fragments[3])
+                commit()
+            }
+        }
+
+
     }
 }

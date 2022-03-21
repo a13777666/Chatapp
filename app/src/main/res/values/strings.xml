@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Chatapp</string>
+    <string name="app_name">yenchenapp</string>
+    <string name="send">發送</string>
+    <string name="exitroom">確定要狠心離開聊天室？</string>
+    <string name="login">登入</string>
+    <string name="remember">記住我</string>
+    <string name="logout">登出</string>
+    <string name="select_album">從相簿中選擇</string>
+    <string name="shot">拍照</string>
+    <string name="Sign_up">註冊會員</string>
+    <string name="send2">送出</string>
+    <string name="sereach">搜尋</string>
+    <string name="personal">個人</string>
+    <string name="mainpage">首頁</string>
+    <string name="recommend">熱門推薦</string>
 </resources>

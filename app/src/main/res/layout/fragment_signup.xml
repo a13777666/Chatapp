@@ -35,7 +35,7 @@
         android:id="@+id/ed_nickname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/round_rectangle_nocolor"
         android:ems="10"
         android:inputType="textPersonName"
@@ -63,21 +63,21 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@mipmap/picpersonal" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="註冊會員"
+        android:text="@string/Sign_up"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,10 +89,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@drawable/round_rectangle_black"
-        android:text="送出"
+        android:text="@string/send2"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_password" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b_pick"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
+        android:background="@mipmap/btnedit"
+        app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

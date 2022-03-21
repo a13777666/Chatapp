@@ -4,13 +4,13 @@
     <item
         android:id="@+id/action_mainpage"
         android:icon="@mipmap/tabhome"
-        android:title="首頁" />
+        android:title="@string/mainpage" />
     <item
         android:id="@+id/action_search"
         android:icon="@mipmap/tabsearch"
-        android:title="搜尋" />
+        android:title="@string/sereach" />
     <item
         android:id="@+id/action_personal"
         android:icon="@mipmap/tabpersonal"
-        android:title="個人" />
+        android:title="@string/personal" />
 </menu>

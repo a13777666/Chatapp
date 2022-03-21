@@ -18,14 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val pref = this.getSharedPreferences("User", Context.MODE_PRIVATE)
-        pref.edit()
-            .putString(Extras.LOGIN_USERNAME, "UNHAPPY")
-            .apply()
-
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initFragments()
@@ -46,9 +38,16 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_personal -> {
-                    supportFragmentManager.beginTransaction().run {
-                        replace(R.id.main_container, fragments[2])
-                        commit()
+                    if(Nowuser.LOGIN_STATE == 1) {
+                        supportFragmentManager.beginTransaction().run {
+                            replace(R.id.main_container, fragments[5])
+                            commit()
+                        }
+                    }else if(Nowuser.LOGIN_STATE == 0){
+                        supportFragmentManager.beginTransaction().run {
+                            replace(R.id.main_container, fragments[2])
+                            commit()
+                        }
                     }
                     true
                 }
@@ -60,8 +59,11 @@ class MainActivity : AppCompatActivity() {
 
         fun initFragments() {
             fragments.add(0, MainpageFragment())
-            fragments.add(1, SignupFragment())
+            fragments.add(1, SearchFragment())
             fragments.add(2, LoginFragment())
+            fragments.add(3, SignupFragment())
+            fragments.add(4, PickFragment())
+            fragments.add(5, PersonalFragment())
 
             supportFragmentManager.beginTransaction().run {
                 replace(R.id.main_container, fragments[0])

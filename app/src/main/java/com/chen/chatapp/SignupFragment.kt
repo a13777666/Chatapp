@@ -13,7 +13,6 @@ import com.chen.chatapp.databinding.FragmentSignupBinding
 class SignupFragment: Fragment() {
     lateinit var binding: FragmentSignupBinding
     val viewModel by viewModels<SignupViewModel>()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,11 +24,13 @@ class SignupFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val parentActivity = requireActivity() as MainActivity
         lateinit var nickname: String
         lateinit var user: String
         lateinit var password: String
 
         val pref = requireContext().getSharedPreferences("User", Context.MODE_PRIVATE)
+        val prefrem = requireContext().getSharedPreferences("Rem", Context.MODE_PRIVATE)
         //viewModel.check(username, password)
         binding.bSend.setOnClickListener {
             nickname = binding.edNickname.text.toString()
@@ -38,15 +39,40 @@ class SignupFragment: Fragment() {
             viewModel.check(nickname, user, password)
         }
 
+        binding.bExit.setOnClickListener {
+            parentActivity.supportFragmentManager.beginTransaction().run {
+                replace(R.id.main_container, parentActivity.fragments[2])
+                commit()
+            }
+        }
+
+        binding.bPick.setOnClickListener {
+            parentActivity.supportFragmentManager.beginTransaction().run {
+                replace(R.id.main_container, parentActivity.fragments[4])
+                commit()
+            }
+        }
 
         lateinit var message: String
         viewModel.signup.observe(viewLifecycleOwner) { state ->
             if(state == SignupViewModel.Signup.PASS) {
                 pref.edit()
-                    .putString(Extras.LOGIN_NICKNAME, nickname)
-                    .putString(Extras.LOGIN_USERNAME, user)
-                    .putString(Extras.LOGIN_PASSWORD, password)
+                    .putString(user+Extras.LOGIN_NICKNAME, nickname)
+                    .putString(user, user)
+                    .putString(user+Extras.LOGIN_PASSWORD, password)
                     .apply()
+                prefrem.edit()
+                    .putString(user, user)
+                    .putString(user+Extras.LOGIN_PASSWORD, password)
+                    .apply()
+
+                Toast.makeText(requireContext(), "註冊成功", Toast.LENGTH_SHORT)
+                    .show()
+                parentActivity.supportFragmentManager.beginTransaction().run {
+                    replace(R.id.main_container, parentActivity.fragments[2])
+                    commit()
+                }
+
             }else{
                  message = when(state) {
                             SignupViewModel.Signup.USER_TOOLONG -> "帳號太長"
@@ -56,9 +82,10 @@ class SignupFragment: Fragment() {
                             SignupViewModel.Signup.SYMBOL -> "不能有特殊符號"
                             else -> "somthing goes wrong"
                 }
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+                    .show()
             }
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-                .show()
+
         }
     }
 }

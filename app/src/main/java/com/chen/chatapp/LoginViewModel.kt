@@ -7,22 +7,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LoginViewModel(): ViewModel() {
-   /* enum class Login {
-        LOGIN_SUCESS, LOGIN_FAILED
+    enum class Login {
+        LOGIN_SUCESS, LOGIN_FAILED, LOGIN_NOUSER
     }
     val login_state = MutableLiveData<Login>()
     //spdata
 
-    fun initSharePreference(context: Context){
+    fun checkSP(context: Context, username: String, password: String){
         val pref = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+        val db_user = pref.getString(username, "")
 
+        login_state.value = if(db_user == "")  Login.LOGIN_NOUSER
+                            else{
+                                val db_password = pref.getString(db_user+Extras.LOGIN_PASSWORD, "")
+                                if (db_password == password) Login.LOGIN_SUCESS
+                                else Login.LOGIN_FAILED
+                            }
     }
-
-    fun check(username: String, password: String){
-        if(username == spus && password == sppw){
-            login_state.value = Login.LOGIN_SUCESS
-        }else{
-            login_state.value = Login.LOGIN_FAILED
-        }
-    }*/
 }

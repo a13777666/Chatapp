@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">yenchenapp</string>
+    <string name="singup_underline"><u>Sign up</u></string>
+    <string name="send">Send</string>
+    <string name="login">Login</string>
+    <string name="remember">Remember me</string>
+    <string name="logout">Logout</string>
+    <string name="select_album">Select in album</string>
+    <string name="shot">Camera</string>
+    <string name="Sign_up">Sign up member</string>
+    <string name="send2">Send</string>
+    <string name="exitroom">Exit Room?</string>
+    <string name="sereach">Search</string>
+    <string name="personal">Person</string>
+    <string name="mainpage">Mainpage</string>
+    <string name="recommend">Recommend</string>
+</resources>

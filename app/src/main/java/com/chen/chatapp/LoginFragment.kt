@@ -27,43 +27,66 @@ class LoginFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//
-//        var remember = false
-//        val pref = requireContext().getSharedPreferences("User", Context.MODE_PRIVATE)
-//
-//        binding.cbRemember.isChecked = pref.getBoolean("rem_username", false)
-//
-//
-//        val user = pref.getString(Extras.LOGIN_USERNAME, "")
-//        val password = pref.getString(Extras.LOGIN_PASSWORD,"")
-//
-//        if(user != "")
-//            binding.edUser.setText(user)
-//        if(password != "")
-//            binding.edPassword.setText(password)
-//
-//
-//        binding.cbRemember.setOnCheckedChangeListener(){compoundButton, checked ->
-//            remember = checked
-//            if(!checked){
-//                pref.edit()
-//                    .putString(Extras.LOGIN_USERNAME,"")
-//                    .putString(Extras.LOGIN_PASSWORD,"")
-//                    .apply()
-//            }
-//        }
-//        binding.bLogin.setOnClickListener {
-//            val username = binding.edUser.text.toString()
-//            val password = binding.edPassword.text.toString()
-//         //   viewModel.check(username, password)
-//            }
-//        viewModel.initSharePreference(requireContext())
-//        viewModel.login_state.observe(viewLifecycleOwner)  { login_state ->
-//                Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_SHORT)
-//                    .show()
-//        }
-//
-//
-    }
+        val parentActivity = requireActivity() as MainActivity
+        var username = ""
+        var password = ""
+        var remember = false
+        val prefrem = requireContext().getSharedPreferences("Rem", Context.MODE_PRIVATE)
+        binding.cbRemember.isChecked = prefrem.getBoolean("rem_username", false)
+        binding.cbRemember.setOnCheckedChangeListener() { compoundButton, checked ->
+            remember = checked
+            prefrem.edit().putBoolean("rem_username", remember).apply()
+            if (!checked) {
+                prefrem.edit().putString(username, "").apply()
+            }
+        }
 
+        val prefUser = prefrem.getString("username", "")
+        if (prefUser != "") {
+            binding.edUser.setText(prefUser)
+        }
+        binding.bLogin.setOnClickListener {
+            username = binding.edUser.text.toString()
+            password = binding.edPassword.text.toString()
+            viewModel.checkSP(requireContext(), username, password)
+        }
+
+        binding.bSignin.setOnClickListener {
+            parentActivity.supportFragmentManager.beginTransaction().run {
+                replace(R.id.main_container, parentActivity.fragments[3])
+                commit()
+            }
+        }
+
+        val pref = requireContext().getSharedPreferences("User", Context.MODE_PRIVATE)
+        viewModel.login_state.observe(viewLifecycleOwner) { login_state ->
+            if (login_state == LoginViewModel.Login.LOGIN_SUCESS) {
+                if (remember) {
+                    prefrem.edit()
+                        .putString(username, username)
+                        .apply()
+                }
+                Toast.makeText(requireContext(), "登入成功", Toast.LENGTH_SHORT)
+                .show()
+                Nowuser.User = pref.getString(username+Extras.LOGIN_PASSWORD, "")!!
+                Nowuser.Nickname = pref.getString(username+Extras.LOGIN_NICKNAME, "")!!
+                Nowuser.LOGIN_STATE = 1
+
+                parentActivity.supportFragmentManager.beginTransaction().run {
+                    replace(R.id.main_container, parentActivity.fragments[0])
+                    commit()
+                }
+
+            } else {
+                val message = when (login_state) {
+                    LoginViewModel.Login.LOGIN_NOUSER -> "您還未註冊"
+                    LoginViewModel.Login.LOGIN_FAILED -> "密碼錯誤"
+                    else -> "somthing goes wrong"
+                }
+
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
 }

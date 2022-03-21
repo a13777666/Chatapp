@@ -16,12 +16,14 @@ class SignupViewModel(): ViewModel() {
 
     fun check(nickname: String, user: String, password: String) {
         val check = Regex("^[a-zA-Z0-9]+$")
-        signup.value = if (check.matches(user) || check.matches(password)) {
-            if (user.length < 4) Signup.USER_TOOSHORT
-            if (user.length > 20) Signup.USER_TOOLONG
-            if (password.length < 6) Signup.PWD_TOOSHORT
-            if (password.length > 12) Signup.PWD_TOOLONG
-            else Signup.PASS
+        signup.value = if (check.matches(user) && check.matches(password)) {
+            if (user.length <= 4) Signup.USER_TOOSHORT
+            else if (user.length >= 20) Signup.USER_TOOLONG
+            else{
+                if (password.length <= 6) Signup.PWD_TOOSHORT
+                else if (password.length >= 12) Signup.PWD_TOOLONG
+                else Signup.PASS
+            }
         } else Signup.SYMBOL
     }
 }

@@ -10,14 +10,18 @@
         <entry key="app/src/main/res/drawable/room_item_round_corner.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/round_rectangle_black.xml" value="0.1155" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_room.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_roomexit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_mainpage.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.1431159420289855" />
+        <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_pick.xml" value="0.1431159420289855" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1431159420289855" />
-        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.22" />
         <entry key="app/src/main/res/layout/row_chatroom.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/row_message.xml" value="0.67" />
         <entry key="app/src/main/res/menu/bottom_nav_bar.xml" value="0.22239583333333332" />
+        <entry key="app/src/main/res/menu/menu_roomlist.xml" value="0.1" />
       </map>
     </option>
   </component>

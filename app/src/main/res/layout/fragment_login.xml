@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:background="@drawable/round_rectangle_black"
-        android:text="登入"
+        android:text="@string/login"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="記住我"
+        android:text="@string/remember"
         app:layout_constraintStart_toStartOf="@+id/ed_password"
         app:layout_constraintTop_toBottomOf="@+id/ed_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>
