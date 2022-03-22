@@ -1,6 +1,11 @@
 package com.chen.lib
 
+import com.google.gson.Gson
+import java.net.URL
+
+
 fun main() {
-    val r1 = Regex("^[a-zA-Z0-9]+$" )
-    println(r1.matches("789"))
+
+    var set = mutableSetOf<Int>(0)
+    if(set.isNullOrEmpty()) println("111")
 }

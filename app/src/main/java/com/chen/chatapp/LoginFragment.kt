@@ -14,6 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.chen.chatapp.databinding.FragmentLoginBinding
 
 class LoginFragment: Fragment() {
+    companion object {
+        val TAG = LoginFragment::class.java.simpleName
+        val instance: LoginFragment by lazy {
+            LoginFragment()
+        }
+    }
     lateinit var  binding: FragmentLoginBinding
     val viewModel by viewModels<LoginViewModel>()
     override fun onCreateView(
@@ -40,8 +46,9 @@ class LoginFragment: Fragment() {
                 prefrem.edit().putString(username, "").apply()
             }
         }
+        viewModel.login_state.value = LoginViewModel.Login.INIT
 
-        val prefUser = prefrem.getString("username", "")
+        val prefUser = prefrem.getString(username, "")
         if (prefUser != "") {
             binding.edUser.setText(prefUser)
         }
@@ -70,7 +77,8 @@ class LoginFragment: Fragment() {
                 .show()
                 Nowuser.User = pref.getString(username+Extras.LOGIN_PASSWORD, "")!!
                 Nowuser.Nickname = pref.getString(username+Extras.LOGIN_NICKNAME, "")!!
-                Nowuser.LOGIN_STATE = 1
+                Nowuser.LOGIN_STATE = true
+
 
                 parentActivity.supportFragmentManager.beginTransaction().run {
                     replace(R.id.main_container, parentActivity.fragments[0])
@@ -81,6 +89,7 @@ class LoginFragment: Fragment() {
                 val message = when (login_state) {
                     LoginViewModel.Login.LOGIN_NOUSER -> "您還未註冊"
                     LoginViewModel.Login.LOGIN_FAILED -> "密碼錯誤"
+                    LoginViewModel.Login.INIT -> "您好  請輸入帳密"
                     else -> "somthing goes wrong"
                 }
 

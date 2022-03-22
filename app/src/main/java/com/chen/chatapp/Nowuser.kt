@@ -4,6 +4,7 @@ class Nowuser {
     companion object{
         lateinit var User : String
         lateinit var Nickname : String
-        var LOGIN_STATE = 0
+        var headshot = ""
+        var LOGIN_STATE = false
     }
 }

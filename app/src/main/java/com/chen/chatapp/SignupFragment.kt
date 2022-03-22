@@ -1,16 +1,25 @@
 package com.chen.chatapp
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.chen.chatapp.databinding.FragmentSignupBinding
 
 class SignupFragment: Fragment() {
+    companion object {
+        val TAG = SignupFragment::class.java.simpleName
+        val instance : SignupFragment by lazy {
+            SignupFragment()
+        }
+    }
+
     lateinit var binding: FragmentSignupBinding
     val viewModel by viewModels<SignupViewModel>()
     override fun onCreateView(
@@ -87,5 +96,8 @@ class SignupFragment: Fragment() {
             }
 
         }
+
+        val Uri = Nowuser.headshot.toUri()
+        binding.ivAvatar.setImageURI(Uri)
     }
 }

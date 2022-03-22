@@ -1,5 +1,6 @@
 package com.chen.chatapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,8 +19,11 @@ import com.chen.chatapp.databinding.RowChatroomBinding
 import okhttp3.WebSocket
 
 class MainpageFragment: Fragment() {
-    companion object{
+    companion object {
         val TAG = MainpageFragment::class.java.simpleName
+        val instance: MainpageFragment by lazy {
+            MainpageFragment()
+        }
     }
     lateinit var binding: FragmentMainpageBinding
     private  lateinit var adapter: ChatRoomAdapter
@@ -40,7 +44,7 @@ class MainpageFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //set Recycler
-        if(Nowuser.LOGIN_STATE == 0){
+        if(Nowuser.LOGIN_STATE == false){
             binding.ivAvatar.visibility = View.GONE
             binding.tvNickname.visibility = View.GONE
         }else{

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 
 class LoginViewModel(): ViewModel() {
     enum class Login {
-        LOGIN_SUCESS, LOGIN_FAILED, LOGIN_NOUSER
+        INIT, LOGIN_SUCESS, LOGIN_FAILED, LOGIN_NOUSER
     }
     val login_state = MutableLiveData<Login>()
     //spdata

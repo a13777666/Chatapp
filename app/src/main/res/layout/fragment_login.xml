@@ -40,9 +40,9 @@
         android:layout_marginTop="150dp"
         android:background="@drawable/round_rectangle_nocolor"
         android:ems="10"
+        android:hint="@string/account"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,9 +54,9 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/round_rectangle_nocolor"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_user" />

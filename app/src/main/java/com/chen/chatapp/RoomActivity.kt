@@ -41,7 +41,7 @@ class RoomActivity : AppCompatActivity() {
             .build()
 
         lateinit var nickname : String
-        if(Nowuser.LOGIN_STATE == 1){
+        if(Nowuser.LOGIN_STATE == true){
             nickname = Nowuser.Nickname
         }else   nickname = "訪客"
 
@@ -83,14 +83,12 @@ class RoomActivity : AppCompatActivity() {
         }
 
 
-
+        adapter = ChatMessageAdapter()
         binding.chatRecycler.setHasFixedSize(true)
-        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         lm.stackFromEnd = true
         binding.chatRecycler.layoutManager = lm
-        adapter = ChatMessageAdapter()
         binding.chatRecycler.adapter = adapter
-
 
 
         viewModel.message.observe(this) { message ->

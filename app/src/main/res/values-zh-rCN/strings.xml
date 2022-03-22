@@ -15,4 +15,9 @@
     <string name="personal">个人</string>
     <string name="mainpage">首页</string>
     <string name="recommend">热门推荐</string>
+    <string name="search_result">搜寻结果</string>
+    <string name="password">密码</string>
+    <string name="nickname">昵称</string>
+    <string name="account">帐号</string>
+    <string name="input_message">输入讯息</string>
 </resources>

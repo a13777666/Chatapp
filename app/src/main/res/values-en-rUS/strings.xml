@@ -15,4 +15,9 @@
     <string name="personal">Person</string>
     <string name="mainpage">Mainpage</string>
     <string name="recommend">Recommend</string>
+    <string name="search_result">Search Result</string>
+    <string name="password">password</string>
+    <string name="nickname">nickname</string>
+    <string name="account">account</string>
+    <string name="input_message">input message</string>
 </resources>

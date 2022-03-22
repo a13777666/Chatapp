@@ -10,8 +10,9 @@ import com.chen.chatapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.java.simpleName
-    }
 
+
+    }
 
     lateinit var binding: ActivityMainBinding
     val fragments = mutableListOf<Fragment>()
@@ -38,12 +39,12 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.action_personal -> {
-                    if(Nowuser.LOGIN_STATE == 1) {
+                    if(Nowuser.LOGIN_STATE == true) {
                         supportFragmentManager.beginTransaction().run {
                             replace(R.id.main_container, fragments[5])
                             commit()
                         }
-                    }else if(Nowuser.LOGIN_STATE == 0){
+                    }else if(Nowuser.LOGIN_STATE == false){
                         supportFragmentManager.beginTransaction().run {
                             replace(R.id.main_container, fragments[2])
                             commit()
@@ -58,12 +59,12 @@ class MainActivity : AppCompatActivity() {
 
 
         fun initFragments() {
-            fragments.add(0, MainpageFragment())
-            fragments.add(1, SearchFragment())
-            fragments.add(2, LoginFragment())
-            fragments.add(3, SignupFragment())
+            fragments.add(0, MainpageFragment.instance)
+            fragments.add(1, SearchFragment.instance)
+            fragments.add(2, LoginFragment.instance)
+            fragments.add(3, SignupFragment.instance)
             fragments.add(4, PickFragment())
-            fragments.add(5, PersonalFragment())
+            fragments.add(5, PersonalFragment.instance)
 
             supportFragmentManager.beginTransaction().run {
                 replace(R.id.main_container, fragments[0])
