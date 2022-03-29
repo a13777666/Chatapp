@@ -1,22 +1,26 @@
 package com.chen.chatapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chen.chatapp.databinding.FragmentMainpageBinding
 import com.chen.chatapp.databinding.RowChatroomBinding
-import okhttp3.WebSocket
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+
+
+
+
 
 class MainpageFragment: Fragment() {
     companion object {
@@ -29,9 +33,6 @@ class MainpageFragment: Fragment() {
     private  lateinit var adapter: ChatRoomAdapter
     val viewModel by viewModels<MainpageViewModel>()
 
-//    var RoomLauncher = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()){}
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +44,7 @@ class MainpageFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //set Recycler
         if(Nowuser.LOGIN_STATE == false){
             binding.ivAvatar.visibility = View.GONE

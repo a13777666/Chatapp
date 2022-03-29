@@ -3,14 +3,18 @@ package com.chen.chatapp
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.chen.chatapp.databinding.FragmentSignupBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignupFragment: Fragment() {
     companion object {
@@ -21,7 +25,10 @@ class SignupFragment: Fragment() {
     }
 
     lateinit var binding: FragmentSignupBinding
+
+    val shareviewModel by activityViewModels<PickSharedViewModel>()
     val viewModel by viewModels<SignupViewModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,9 +45,10 @@ class SignupFragment: Fragment() {
         lateinit var user: String
         lateinit var password: String
 
-        val pref = requireContext().getSharedPreferences("User", Context.MODE_PRIVATE)
-        val prefrem = requireContext().getSharedPreferences("Rem", Context.MODE_PRIVATE)
-        //viewModel.check(username, password)
+        //SharePreference method
+//        val pref = requireContext().getSharedPreferences("User", Context.MODE_PRIVATE)
+//        val prefrem = requireContext().getSharedPreferences("Rem", Context.MODE_PRIVATE)
+
         binding.bSend.setOnClickListener {
             nickname = binding.edNickname.text.toString()
             user = binding.edUser.text.toString()
@@ -62,18 +70,40 @@ class SignupFragment: Fragment() {
             }
         }
 
+        binding.ivAvatar.scaleType = ImageView.ScaleType.CENTER_CROP
+        shareviewModel.avatar.observe(viewLifecycleOwner){ bitmap ->
+            binding.ivAvatar.setImageBitmap(bitmap)
+        }
+
+
         lateinit var message: String
         viewModel.signup.observe(viewLifecycleOwner) { state ->
             if(state == SignupViewModel.Signup.PASS) {
-                pref.edit()
-                    .putString(user+Extras.LOGIN_NICKNAME, nickname)
-                    .putString(user, user)
-                    .putString(user+Extras.LOGIN_PASSWORD, password)
-                    .apply()
-                prefrem.edit()
-                    .putString(user, user)
-                    .putString(user+Extras.LOGIN_PASSWORD, password)
-                    .apply()
+                //SharePreference method
+//                pref.edit()
+//                    .putString(user+Extras.LOGIN_NICKNAME, nickname)
+//                    .putString(user, user)
+//                    .putString(user+Extras.LOGIN_PASSWORD, password)
+//                    .apply()
+//                prefrem.edit()
+//                    .putString(user, user)
+//                    .putString(user+Extras.LOGIN_PASSWORD, password)
+//                    .apply()
+                //Use Firebase database
+                val firedb = FirebaseFirestore.getInstance()
+                val userdata: MutableMap<String, Any> = HashMap()
+                userdata["nickname"] = nickname
+                userdata["account"] = user
+                userdata["password"] = password
+
+                firedb.collection("users")
+                    .add(userdata)
+                    .addOnSuccessListener{ documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.id)
+                    }
+                    .addOnFailureListener{ error ->
+                        Log.w(TAG, "Error adding document", error)
+                    }
 
                 Toast.makeText(requireContext(), "註冊成功", Toast.LENGTH_SHORT)
                     .show()

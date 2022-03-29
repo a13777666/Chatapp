@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -79,12 +80,12 @@ class LoginFragment: Fragment() {
                 Nowuser.Nickname = pref.getString(username+Extras.LOGIN_NICKNAME, "")!!
                 Nowuser.LOGIN_STATE = true
 
+                parentActivity.binding.bottomNavBar.selectTab(parentActivity.binding.bottomNavBar.tabs[0])
 
                 parentActivity.supportFragmentManager.beginTransaction().run {
                     replace(R.id.main_container, parentActivity.fragments[0])
                     commit()
                 }
-
             } else {
                 val message = when (login_state) {
                     LoginViewModel.Login.LOGIN_NOUSER -> "您還未註冊"

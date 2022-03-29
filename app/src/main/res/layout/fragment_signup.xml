@@ -20,7 +20,7 @@
         android:id="@+id/ed_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_rectangle_nocolor"
         android:ems="10"
         android:hint="@string/password"
@@ -50,7 +50,7 @@
         android:id="@+id/ed_user"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_rectangle_nocolor"
         android:ems="10"
         android:hint="@string/account"
@@ -63,14 +63,14 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="50dp"
+        android:background="@mipmap/picpersonal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:srcCompat="@mipmap/picpersonal" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
@@ -87,7 +87,7 @@
         android:id="@+id/b_send"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/round_rectangle_black"
         android:text="@string/send2"
         android:textColor="@color/white"

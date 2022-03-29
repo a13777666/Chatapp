@@ -3,9 +3,12 @@ package com.chen.chatapp
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.VideoView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -22,9 +25,13 @@ import okhttp3.*
 import okio.ByteString
 import java.util.concurrent.TimeUnit
 
+
+
+
+
+
 class RoomActivity : AppCompatActivity() {
     val TAG = RoomActivity::class.java.simpleName
-
     lateinit var binding: ActivityRoomBinding
     private  lateinit var adapter: RoomActivity.ChatMessageAdapter
     val viewModel by viewModels<RoomViewModel>()
@@ -59,7 +66,6 @@ class RoomActivity : AppCompatActivity() {
             }
         })
 
-
         binding.bSend.setOnClickListener {
             val message = binding.edChat.text.toString()
             websocket.send(Gson().toJson(send("N", message)))
@@ -85,7 +91,7 @@ class RoomActivity : AppCompatActivity() {
 
         adapter = ChatMessageAdapter()
         binding.chatRecycler.setHasFixedSize(true)
-        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
+        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         lm.stackFromEnd = true
         binding.chatRecycler.layoutManager = lm
         binding.chatRecycler.adapter = adapter
@@ -107,6 +113,7 @@ class RoomActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
             val sendmessage = Message[position]
             holder.message.setText(sendmessage)
+            holder.message.animation = AnimationUtils.loadAnimation(holder.message.context, R.anim.scale)
         }
 
         override fun getItemCount(): Int {

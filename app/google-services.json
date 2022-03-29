@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1044191647635",
+    "project_id": "benching-chatapp",
+    "storage_bucket": "benching-chatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044191647635:android:94498025e3c2e05b7eba66",
+        "android_client_info": {
+          "package_name": "com.chen.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044191647635-nn7j85g4s99t9phnmlveh32m221gcvle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDCvjcr_t5Eb-C_3FmZ4gmAYIkRJD0fZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044191647635-nn7j85g4s99t9phnmlveh32m221gcvle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
