@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.chen.chatapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         private val TAG = MainActivity::class.java.simpleName
     }
 
+    val sharedViewModel by viewModels<PickGetShareViewModel>()
     lateinit var binding: ActivityMainBinding
     val fragments = mutableListOf<Fragment>()
 
@@ -20,6 +23,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initFragments()
+        val prefrem = this.getSharedPreferences("Prestate", Context.MODE_PRIVATE)
+        Nowuser.LOGIN_STATE = prefrem.getBoolean("pre-login_state", false)
+        Log.d(TAG, "onCreate: ${prefrem.getBoolean("pre-login_state", false)}")
+        if(Nowuser.LOGIN_STATE == true){
+            Nowuser.User = prefrem.getString("account", "")!!
+            Nowuser.Nickname = prefrem.getString("nickname", "")!!
+            sharedViewModel.getavatar(Nowuser.User)
+        }
+
+
 
         binding.bottomNavBar.onTabSelected = {  item ->
             when (item.id) {

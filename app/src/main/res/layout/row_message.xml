@@ -12,7 +12,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:background="@android:drawable/editbox_background"
+        android:background="@android:drawable/divider_horizontal_dim_dark"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"

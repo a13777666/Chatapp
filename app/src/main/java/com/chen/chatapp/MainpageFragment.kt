@@ -1,12 +1,15 @@
 package com.chen.chatapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +35,7 @@ class MainpageFragment: Fragment() {
     lateinit var binding: FragmentMainpageBinding
     private  lateinit var adapter: ChatRoomAdapter
     val viewModel by viewModels<MainpageViewModel>()
+    val pickgetsharedViewModel by  activityViewModels<PickGetShareViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,12 +49,18 @@ class MainpageFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var db = FirebaseFirestore.getInstance()
+        val test = db.collection("users")
+                .whereEqualTo("account", "123")
+                .get()
+        Log.d(TAG, "onViewCreated: $test")
+        
         //set Recycler
         if(Nowuser.LOGIN_STATE == false){
             binding.ivAvatar.visibility = View.GONE
-            binding.tvNickname.visibility = View.GONE
+            binding.tvMainname.visibility = View.GONE
         }else{
-            binding.tvNickname.text = Nowuser.Nickname
+            binding.tvMainname.text = Nowuser.Nickname
             binding.ivAvatar.visibility = View.VISIBLE
         }
 
@@ -59,10 +69,21 @@ class MainpageFragment: Fragment() {
         adapter = ChatRoomAdapter()
         binding.roomRecycler.adapter = adapter
 
+        pickgetsharedViewModel.bitmap.observe(viewLifecycleOwner){ bitmap ->
+            binding.ivAvatar.setImageBitmap(bitmap)
+        }
+
         viewModel.chatRooms.observe(viewLifecycleOwner) { rooms ->
             adapter.submitRooms(rooms)
+            Extras.AllRooms.clear()
+            Extras.AllRooms.addAll(rooms)
         }
         viewModel.getAllRooms()
+
+        binding.swDaynight.setOnCheckedChangeListener{ compounndButton, checked ->
+            if(checked) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     inner class ChatRoomAdapter: RecyclerView.Adapter<ChatRoomViewHolder>() {

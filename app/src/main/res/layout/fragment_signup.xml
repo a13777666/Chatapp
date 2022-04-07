@@ -32,21 +32,6 @@
         app:layout_constraintTop_toBottomOf="@+id/ed_user" />
 
     <EditText
-        android:id="@+id/ed_nickname"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/round_rectangle_nocolor"
-        android:ems="10"
-        android:hint="@string/nickname"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
-
-    <EditText
         android:id="@+id/ed_user"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -60,6 +45,21 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_nickname" />
+
+    <EditText
+        android:id="@+id/ed_nickname"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/round_rectangle_nocolor"
+        android:ems="10"
+        android:hint="@string/nickname"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
     <ImageView
         android:id="@+id/iv_avatar"

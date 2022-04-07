@@ -62,12 +62,12 @@ class SearchFragment: Fragment() {
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val searchtext = binding.svRoom.query.toString()
-                viewModel.getSearchRooms(searchtext)
+                viewModel.getSearchRooms(searchtext, Extras.AllRooms)
                 return false
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 val searchtext = binding.svRoom.query.toString()
-                viewModel.getSearchRooms(searchtext)
+                viewModel.getSearchRooms(searchtext, Extras.AllRooms)
                 return false
             }
         })

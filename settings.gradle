@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Chatapp"
 include ':app'
-include ':app:lib'

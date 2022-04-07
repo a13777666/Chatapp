@@ -51,9 +51,17 @@ class PickFragment: Fragment() {
         val parentActivity = requireActivity() as MainActivity
 
         binding.bExit.setOnClickListener {
-            parentActivity.supportFragmentManager.beginTransaction().run {
-                replace(R.id.main_container, parentActivity.fragments[3])
-                commit()
+            val args = this.arguments
+            val inputdata = args?.get("data")
+            when (inputdata){
+                "fromperson" -> parentActivity.supportFragmentManager.beginTransaction().run {
+                    replace(R.id.main_container, parentActivity.fragments[5])
+                    commit()
+                    }
+                "fromsignup" -> parentActivity.supportFragmentManager.beginTransaction().run {
+                    replace(R.id.main_container, parentActivity.fragments[3])
+                    commit()
+                }
             }
         }
 

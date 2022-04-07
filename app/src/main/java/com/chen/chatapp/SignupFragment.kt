@@ -1,6 +1,8 @@
 package com.chen.chatapp
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +17,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.chen.chatapp.databinding.FragmentSignupBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import kotlin.concurrent.thread
 
 class SignupFragment: Fragment() {
     companion object {
@@ -26,7 +31,7 @@ class SignupFragment: Fragment() {
 
     lateinit var binding: FragmentSignupBinding
 
-    val shareviewModel by activityViewModels<PickSharedViewModel>()
+    val pickshareviewModel by activityViewModels<PickSharedViewModel>()
     val viewModel by viewModels<SignupViewModel>()
 
     override fun onCreateView(
@@ -64,17 +69,26 @@ class SignupFragment: Fragment() {
         }
 
         binding.bPick.setOnClickListener {
-            parentActivity.supportFragmentManager.beginTransaction().run {
-                replace(R.id.main_container, parentActivity.fragments[4])
-                commit()
-            }
+//            parentActivity.supportFragmentManager.beginTransaction().run {
+//                replace(R.id.main_container, parentActivity.fragments[4])
+//                commit()
+//            }
+            val bundle = Bundle()
+            bundle.putString("data","fromsignup")
+            val fragment = PickFragment()
+            fragment.arguments = bundle
+            fragmentManager?.beginTransaction()?.replace(R.id.main_container,fragment)?.commit()
         }
 
+        lateinit var bitmaptmp: Bitmap
         binding.ivAvatar.scaleType = ImageView.ScaleType.CENTER_CROP
-        shareviewModel.avatar.observe(viewLifecycleOwner){ bitmap ->
+        pickshareviewModel.avatar.observe(viewLifecycleOwner){ bitmap ->
             binding.ivAvatar.setImageBitmap(bitmap)
-        }
+            //上傳頭像用
+            bitmaptmp = bitmap
 
+
+        }
 
         lateinit var message: String
         viewModel.signup.observe(viewLifecycleOwner) { state ->
@@ -91,19 +105,30 @@ class SignupFragment: Fragment() {
 //                    .apply()
                 //Use Firebase database
                 val firedb = FirebaseFirestore.getInstance()
+                val filename = "$user"+"avatar"
+                val storageRef = FirebaseStorage.getInstance().getReference("images/$filename")
+                val baos = ByteArrayOutputStream()
+                bitmaptmp.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                storageRef.putBytes(data)
+
+
                 val userdata: MutableMap<String, Any> = HashMap()
                 userdata["nickname"] = nickname
                 userdata["account"] = user
                 userdata["password"] = password
 
-                firedb.collection("users")
-                    .add(userdata)
-                    .addOnSuccessListener{ documentReference ->
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.id)
+                //storageReference.putBytes(data)
+
+                firedb.collection("users").document("$user")
+                        .set(userdata)
+                        .addOnSuccessListener{ documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID:")
                     }
                     .addOnFailureListener{ error ->
                         Log.w(TAG, "Error adding document", error)
                     }
+
 
                 Toast.makeText(requireContext(), "註冊成功", Toast.LENGTH_SHORT)
                     .show()
@@ -126,8 +151,5 @@ class SignupFragment: Fragment() {
             }
 
         }
-
-        val Uri = Nowuser.headshot.toUri()
-        binding.ivAvatar.setImageURI(Uri)
     }
 }

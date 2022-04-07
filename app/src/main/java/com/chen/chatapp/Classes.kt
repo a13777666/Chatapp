@@ -158,3 +158,18 @@ data class Content(
     val en: String,
     val tw: String
 )
+
+data class memberNotice(
+    val body: NoticeBody,
+    val event: String,
+    val room_id: String,
+    val sender_role: Int,
+    val time: String
+)
+
+data class NoticeBody(
+    val num: Int,
+    val target_account: String,
+    val text: String,
+    val type: String
+)
